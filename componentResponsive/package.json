@@ -1,5 +1,5 @@
 {
-  "name": "dashboard-tecnico",
+  "name": "componentResponsive",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -20,14 +20,8 @@
     "@ionic/vue": "^8.0.0",
     "@ionic/vue-router": "^8.0.0",
     "apexcharts": "^5.10.6",
-    "chart.js": "^3.9.1",
-    "chartjs-adapter-date-fns": "^3.0.0",
-    "chartjs-plugin-streaming": "^2.0.0",
-    "echarts": "^6.0.0",
     "ionicons": "^7.0.0",
     "vue": "^3.3.0",
-    "vue-chart-3": "^3.1.0",
-    "vue-echarts": "^8.0.1",
     "vue-router": "^4.2.0",
     "vue3-apexcharts": "^1.11.1"
   },

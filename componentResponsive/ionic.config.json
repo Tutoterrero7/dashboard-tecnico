@@ -1,0 +1,7 @@
+{
+  "name": "componentResponsive",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
