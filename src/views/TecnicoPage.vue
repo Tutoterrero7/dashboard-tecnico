@@ -50,7 +50,7 @@
           </ion-col>
         </ion-row>
 
-        <!-- Fila 3: Streaming + Gauge múltiple -->
+        <!-- Fila 3: Streaming + Donut -->
         <ion-row class="ion-row-3">
           <ion-col size="12" size-lg="4.5">
             <div class="box">
@@ -64,7 +64,7 @@
           </ion-col>
           <ion-col size="12" size-lg="3">
             <div class="box">
-              <EchartsGaugeMultiple :segments="ringSegments" />
+              <ApexDonut :segments="donutData" />
             </div>
           </ion-col>
         </ion-row>
@@ -80,7 +80,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import SparkLine from '@/components/SparkLine.vue';
 import ApexLineRT from '@/components/ApexLineRT.vue';
 import EchartsGauge from '@/components/EchartsGauge.vue';
-import EchartsGaugeMultiple from '@/components/EchartsGaugeMultiple.vue';
+import ApexDonut from '@/components/ApexDonut.vue';
 import ChartJSLineAreaRT from '@/components/ChartJSLineAreaRT.vue';
 
 /********** CONSTANTES **********/
@@ -139,11 +139,13 @@ const sparkData3 = ref({
 const data = ref<{ x: number; y: number }[]>([]);
 const series = ref([{ name: 'Usuarios', data: data.value }]);
 
-/********** GAUGES **********/
+/********** GAUGE SIMPLE **********/
 const currentValue = ref(0);
-const ringSegments = ref([
-  { value: 0, name: '🥘 España', color: '#f97316', min: 80, max: 99 },
-  { value: 0, name: '🌍 Mundo', color: '#10b981', min: 10, max: 30 }
+
+/********** DONUT DATA (reemplaza el antiguo ringSegments) **********/
+const donutData = ref([
+  { value: 85, name: 'España', color: '#f97316' },
+  { value: 28, name: 'Mundo', color: '#10b981' }
 ]);
 
 /********** REAL TIME LOGIC **********/
@@ -157,14 +159,21 @@ function addDataRealTime() {
   }
   lastDate = newX;
   currentValue.value = newY;
-  ringSegments.value.forEach((s) => {
-    s.value = Math.floor(Math.random() * (s.max - s.min + 1)) + s.min;
+
+  // Actualizar donut con valores aleatorios dentro de rangos razonables
+  donutData.value.forEach((item) => {
+    if (item.name === 'España') {
+      item.value = Math.floor(Math.random() * (99 - 80 + 1) + 80); // entre 80 y 99
+    } else if (item.name === 'Mundo') {
+      item.value = Math.floor(Math.random() * (30 - 10 + 1) + 10); // entre 10 y 30
+    }
   });
 }
 
+/********** LIFECYCLE **********/
 onMounted(() => {
   interval = setInterval(addDataRealTime, UPDATE_INTERVAL);
-  // Forzar un resize después del primer render para que los gráficos calculen bien sus dimensiones
+  // Forzar un resize después del primer render
   setTimeout(() => {
     window.dispatchEvent(new Event('resize'));
   }, 100);
@@ -196,9 +205,9 @@ ion-grid {
   flex: 5;
 }
 .ion-row-3 {
-  min-height: 220px;
-  flex: 3;
-  margin-top: 10px;
+  min-height: 120px;
+  flex: 1;
+  margin-top: 0px;
 }
 
 ion-row {
@@ -230,8 +239,8 @@ ion-col {
 }
 
 @media (min-width: 768px) {
-  .ion-row-1 { min-height: 200px; }
-  .ion-row-2 { min-height: 300px; }
-  .ion-row-3 { min-height: 250px; }
+  .ion-row-1 { min-height: 190px; }
+  .ion-row-2 { min-height: 290px; }
+  .ion-row-3 { min-height: 240px; }
 }
 </style>
