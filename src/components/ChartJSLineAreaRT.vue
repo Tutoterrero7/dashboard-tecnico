@@ -65,7 +65,6 @@ onMounted(() => {
               });
             }
           },
-          // ✅ Las opciones grid y ticks van aquí, fuera de realtime
           grid: { color: 'rgba(203, 213, 225, 0.1)' },
           ticks: { color: '#8C8C8C', maxRotation: 0 }
         },
@@ -106,6 +105,11 @@ onBeforeUnmount(() => {
 .streaming-chart {
   width: 100%;
   height: 100%;
-  padding: 8px 15px;
+  min-height: 180px;
+  padding: 8px;
+}
+.streaming-chart canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 </style>

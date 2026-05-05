@@ -49,7 +49,8 @@ const chartOptions = computed(() => ({
 
 <style scoped>
 .gauge-ring-chart {
-  min-height: 300px;
   width: 100%;
+  height: 100%;
+  min-height: 220px;
 }
 </style>
