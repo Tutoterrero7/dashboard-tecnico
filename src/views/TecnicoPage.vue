@@ -223,40 +223,39 @@ onUnmounted(() => {
   clearInterval(interval);
 });
 </script>
-
 <style scoped>
 ion-content {
   --background: #0a0a0a;
-  height: 100%;
+  /* Eliminar height: 100% para que el contenido fluya */
+  height: auto;
 }
 
 ion-grid {
-  height: 100%;
+  /* Eliminar height: 100% */
+  height: auto;
   display: flex;
   flex-direction: column;
 }
 
+ion-row {
+  margin-bottom: 16px;
+}
+
 .ion-row-1 {
   min-height: 180px;
-  flex: 2;
+  flex: 1;
 }
 .ion-row-2 {
   min-height: 250px;
-  flex: 5;
+  flex: 2;
 }
 .ion-row-3 {
   min-height: 200px;
-  flex: 3;
+  flex: 2;
   margin-top: 0px;
 }
 
-ion-row {
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-
 ion-col {
-  max-height: 100%;
   --ion-grid-column-padding: 8px;
 }
 
@@ -276,6 +275,16 @@ ion-col {
 }
 .box:hover {
   transform: translateY(-2px);
+}
+
+/* Ajustes responsivos: en móviles, aumentar la altura de las filas para que los gráficos no se aplasten */
+@media (max-width: 576px) {
+  .ion-row-1 { min-height: 200px; }
+  .ion-row-2 { min-height: 300px; }
+  .ion-row-3 { min-height: 280px; }
+  .box {
+    min-height: 180px;
+  }
 }
 
 @media (min-width: 768px) {

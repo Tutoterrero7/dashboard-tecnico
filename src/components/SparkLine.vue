@@ -19,7 +19,16 @@
 <script setup lang="ts">
 import { IonIcon } from '@ionic/vue';
 import { addIcons } from 'ionicons';
-import { navigateOutline, eyeOutline, peopleOutline, cashOutline, logoIonic } from 'ionicons/icons';
+import { 
+  navigateOutline, 
+  eyeOutline, 
+  peopleOutline, 
+  cashOutline, 
+  logoIonic,
+  hourglassOutline,
+  alertCircleOutline,
+  timerOutline
+} from 'ionicons/icons';
 import VueApexCharts from 'vue3-apexcharts';
 import { ref, watchEffect, onUnmounted } from 'vue';
 
@@ -29,6 +38,9 @@ addIcons({
   'eye-outline': eyeOutline,
   'people-outline': peopleOutline,
   'cash-outline': cashOutline,
+  'hourglass-outline': hourglassOutline,
+  'alert-circle-outline': alertCircleOutline,
+  'timer-outline': timerOutline,
 });
 
 const props = defineProps({
@@ -57,6 +69,7 @@ onUnmounted(() => window.removeEventListener('resize', updateChartHeight));
 </script>
 
 <style scoped>
+/* (estilos sin cambios) */
 .box-sparkline {
   display: flex;
   flex-direction: column;
