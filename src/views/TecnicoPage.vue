@@ -211,7 +211,6 @@ function addDataRealTime() {
   ];
 }
 
-/********** LIFECYCLE **********/
 onMounted(() => {
   interval = setInterval(addDataRealTime, UPDATE_INTERVAL);
   setTimeout(() => {
@@ -226,70 +225,68 @@ onUnmounted(() => {
 <style scoped>
 ion-content {
   --background: #0a0a0a;
-  /* Eliminar height: 100% para que el contenido fluya */
   height: auto;
 }
 
 ion-grid {
-  /* Eliminar height: 100% */
   height: auto;
   display: flex;
   flex-direction: column;
 }
 
 ion-row {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .ion-row-1 {
-  min-height: 180px;
+  min-height: 100px;
   flex: 1;
 }
 .ion-row-2 {
-  min-height: 250px;
+  min-height: 140px;
   flex: 2;
 }
 .ion-row-3 {
-  min-height: 200px;
+  min-height: 130px;
   flex: 2;
   margin-top: 0px;
 }
 
 ion-col {
-  --ion-grid-column-padding: 8px;
+  --ion-grid-column-padding: 4px;
 }
 
 .box {
   background: #1e1e1e;
-  border-radius: 16px;
+  border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: all 0.2s;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px;
+  padding: 1px;
   width: 100%;
   height: 100%;
-  min-height: 150px;
+  min-height: 30px;
 }
+
 .box:hover {
   transform: translateY(-2px);
 }
 
-/* Ajustes responsivos: en móviles, aumentar la altura de las filas para que los gráficos no se aplasten */
 @media (max-width: 576px) {
-  .ion-row-1 { min-height: 200px; }
-  .ion-row-2 { min-height: 300px; }
-  .ion-row-3 { min-height: 280px; }
+  .ion-row-1 { min-height: 120px; }
+  .ion-row-2 { min-height: 180px; }
+  .ion-row-3 { min-height: 160px; }
   .box {
-    min-height: 180px;
+    min-height: 100px;
   }
 }
 
 @media (min-width: 768px) {
-  .ion-row-1 { min-height: 190px; }
-  .ion-row-2 { min-height: 290px; }
-  .ion-row-3 { min-height: 240px; }
+  .ion-row-1 { min-height: 110px; }
+  .ion-row-2 { min-height: 170px; }
+  .ion-row-3 { min-height: 150px; }
 }
 </style>
