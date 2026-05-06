@@ -121,8 +121,8 @@ const sparkData2 = ref({
 });
 
 const sparkData3 = ref({
-  title: "LEADS",
-  value: "2011",
+  title: "Errores",
+  value: "-1%",
   bgColor: "gradient-orange",
   textColor: "white",
   iconName: "people-outline",
@@ -132,7 +132,7 @@ const sparkData3 = ref({
     colors: ['#fff'],
     tooltip: { theme: 'dark', x: { show: false }, y: { title: { formatter: () => '' } } }
   },
-  chartSeries: [{ data: [25, 66, 41, 59, 25, 44, 12, 36, 9, 21] }]
+  chartSeries: [{ data: [0.25, 0.66, 0.41, 0.59, 0.25, 0.44, 0.12, 0.36, 0.09, 0.21] }]
 });
 
 /********** APEX LINE RT **********/
