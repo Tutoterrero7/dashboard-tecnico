@@ -182,11 +182,10 @@ const series = ref([{ name: 'Uptime (%)', data: data.value }]);
 /********** GAUGE SIMPLE -> UPTIME ACTUAL **********/
 const currentValue = ref(99.9);
 
-/********** DONUT DATA -> RENDIMIENTO FANTASY **********/
+/********** DONUT DATA **********/
 const donutData = ref([
-  { value: 60, name: '< 5s', color: '#10b981' },
-  { value: 30, name: '5-8s', color: '#f97316' },
-  { value: 10, name: '> 8s', color: '#ef4444' }
+  { value: 85, name: 'España', color: '#f97316' },
+  { value: 28, name: 'Mundo', color: '#10b981' }
 ]);
 
 /********** REAL TIME LOGIC **********/
@@ -204,14 +203,11 @@ function addDataRealTime() {
   lastDate = newX;
   currentValue.value = uptime;
 
-  // Distribución de tiempos de cálculo Fantasy
-  const fast = 55 + Math.floor(Math.random() * 11);   // 55–65
-  const medium = 25 + Math.floor(Math.random() * 11); // 25–35
-  const slow = 100 - fast - medium;
+
 
   donutData.value = [
   { value: 85, name: 'España', color: '#f97316' },
-  { value: 28, name: 'Mundo', color: '#10b981' }
+  { value: 15, name: 'Mundo', color: '#10b981' }
   ];
 }
 
@@ -249,8 +245,8 @@ ion-grid {
   flex: 5;
 }
 .ion-row-3 {
-  min-height: 120px;
-  flex: 1;
+  min-height: 200px;
+  flex: 3;
   margin-top: 0px;
 }
 
