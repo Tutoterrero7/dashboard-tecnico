@@ -17,53 +17,78 @@
       </ion-header>
 
       <ion-grid class="dashboard-grid">
-        <!-- Fila 1: Sparklines -->
+        <!-- Fila 1: Sparklines (3 KPIs rápidos) -->
         <ion-row class="ion-row-1">
           <ion-col size="12" size-lg="4">
             <div class="box">
+              <!-- Tiempo de Carga de Pantallas -->
               <spark-line v-bind="sparkData1" />
             </div>
           </ion-col>
           <ion-col size="6" size-lg="4">
             <div class="box">
+              <!-- Crash Rate -->
               <spark-line v-bind="sparkData2" />
             </div>
           </ion-col>
           <ion-col size="6" size-lg="4">
             <div class="box">
+              <!-- Latencia de Resultados -->
               <spark-line v-bind="sparkData3" />
             </div>
           </ion-col>
         </ion-row>
 
-        <!-- Fila 2: ApexLineRT + EchartsGauge -->
+        <!-- Fila 2: Uptime (Gauge + línea RT) -->
         <ion-row class="ion-row-2">
           <ion-col size="12" size-md="3" push-md="9">
             <div class="box">
-              <EchartsGauge :value="currentValue" title="USUARIOS ONLINE" />
+              <!-- Uptime actual -->
+              <EchartsGauge :value="currentValue" title="UPTIME" />
             </div>
           </ion-col>
           <ion-col size="12" size-md="9" pull-md="3">
             <div class="box">
-              <ApexLineRT :series="series" title="Usuarios online" :kpi-target="70" color="#3b82f6" />
+              <!-- Uptime histórico en tiempo real -->
+              <ApexLineRT
+                :series="series"
+                title="Uptime histórico"
+                :kpi-target="99.9"
+                color="#3b82f6"
+              />
             </div>
           </ion-col>
         </ion-row>
 
-        <!-- Fila 3: Streaming + Donut -->
+        <!-- Fila 3: Rendimiento Sistema Fantasy -->
         <ion-row class="ion-row-3">
           <ion-col size="12" size-lg="4.5">
             <div class="box">
-              <ChartJSLineAreaRT chartType="line" title="Carga CPU" color="#10b981" :min="0" :max="100" />
+              <!-- Tiempo de cálculo de puntos tras cada carrera -->
+              <ChartJSLineAreaRT
+                chartType="line"
+                title="Tiempo cálculo puntos Fantasy (s)"
+                color="#10b981"
+                :min="0"
+                :max="10"
+              />
             </div>
           </ion-col>
           <ion-col size="12" size-lg="4.5">
             <div class="box">
-              <ChartJSLineAreaRT chartType="area" title="Memoria" color="#3b82f6" :min="50" :max="70" />
+              <!-- Carga del sistema Fantasy -->
+              <ChartJSLineAreaRT
+                chartType="area"
+                title="Carga sistema Fantasy (%)"
+                color="#3b82f6"
+                :min="0"
+                :max="100"
+              />
             </div>
           </ion-col>
           <ion-col size="12" size-lg="3">
             <div class="box">
+              <!-- Distribución de tiempos de cálculo -->
               <ApexDonut :segments="donutData" />
             </div>
           </ion-col>
@@ -90,90 +115,109 @@ let lastDate = Date.now();
 let interval: ReturnType<typeof setInterval>;
 
 /********** SPARKLINES **********/
+/* 1) Tiempo de Carga de Pantallas */
 const sparkData1 = ref({
-  title: "CLICKS",
-  value: "1234",
+  title: "Tiempo de carga de pantallas",
+  value: "1.8s",
   bgColor: "gradient-blue",
   textColor: "white",
-  iconName: "navigate-outline",
+  iconName: "hourglass-outline",
   chartOptions: {
     chart: { type: 'area', sparkline: { enabled: true }, dropShadow: { enabled: true, top: 1, left: 1, blur: 2, opacity: 0.5 } },
     stroke: { curve: 'smooth', width: 3 },
     colors: ['#fff'],
-    tooltip: { theme: 'dark', x: { show: false }, y: { title: { formatter: () => '' } } }
+    tooltip: {
+      theme: 'dark',
+      x: { show: false },
+      y: { title: { formatter: () => 'Tiempo medio (s)' } }
+    }
   },
-  chartSeries: [{ data: [25, 66, 41, 59, 25, 44, 12, 36, 9, 21] }]
+  chartSeries: [{ data: [2.3, 2.1, 1.9, 1.7, 1.8, 1.9, 1.6, 1.7] }]
 });
 
+/* 2) Tasa de Errores (Crash Rate) */
 const sparkData2 = ref({
-  title: "VIEWS",
-  value: "1982",
+  title: "Crash Rate",
+  value: "0.7%",
   bgColor: "gradient-pink",
   textColor: "white",
-  iconName: "eye-outline",
+  iconName: "alert-circle-outline",
   chartOptions: {
     chart: { type: 'bar', sparkline: { enabled: true }, dropShadow: { enabled: true, top: 1, left: 1, blur: 2, opacity: 0.5 } },
     stroke: { curve: 'smooth', width: 3 },
     colors: ['#fff'],
-    tooltip: { theme: 'dark', x: { show: false }, y: { title: { formatter: () => '' } } }
+    tooltip: {
+      theme: 'dark',
+      x: { show: false },
+      y: { title: { formatter: () => '% sesiones con error' } }
+    }
   },
-  chartSeries: [{ data: [25, 66, 41, 59, 25, 44, 12, 36, 9, 21] }]
+  chartSeries: [{ data: [1.3, 1.0, 0.9, 0.8, 0.7, 0.6, 0.7] }]
 });
 
+/* 3) Latencia de Actualización de Resultados */
 const sparkData3 = ref({
-  title: "Errores",
-  value: "-1%",
+  title: "Latencia resultados",
+  value: "320ms",
   bgColor: "gradient-orange",
   textColor: "white",
-  iconName: "people-outline",
+  iconName: "timer-outline",
   chartOptions: {
     chart: { type: 'line', sparkline: { enabled: true }, dropShadow: { enabled: true, top: 1, left: 1, blur: 2, opacity: 0.5 } },
     stroke: { curve: 'straight', width: 3 },
     colors: ['#fff'],
-    tooltip: { theme: 'dark', x: { show: false }, y: { title: { formatter: () => '' } } }
+    tooltip: {
+      theme: 'dark',
+      x: { show: false },
+      y: { title: { formatter: () => 'Latencia (ms)' } }
+    }
   },
-  chartSeries: [{ data: [0.25, 0.66, 0.41, 0.59, 0.25, 0.44, 0.12, 0.36, 0.09, 0.21] }]
+  chartSeries: [{ data: [450, 410, 380, 360, 340, 320, 310, 330] }]
 });
 
-/********** APEX LINE RT **********/
+/********** APEX LINE RT -> UPTIME HISTÓRICO **********/
 const data = ref<{ x: number; y: number }[]>([]);
-const series = ref([{ name: 'Usuarios', data: data.value }]);
+const series = ref([{ name: 'Uptime (%)', data: data.value }]);
 
-/********** GAUGE SIMPLE **********/
-const currentValue = ref(0);
+/********** GAUGE SIMPLE -> UPTIME ACTUAL **********/
+const currentValue = ref(99.9);
 
-/********** DONUT DATA (reemplaza el antiguo ringSegments) **********/
+/********** DONUT DATA -> RENDIMIENTO FANTASY **********/
 const donutData = ref([
-  { value: 85, name: 'España', color: '#f97316' },
-  { value: 28, name: 'Mundo', color: '#10b981' }
+  { value: 60, name: '< 5s', color: '#10b981' },
+  { value: 30, name: '5-8s', color: '#f97316' },
+  { value: 10, name: '> 8s', color: '#ef4444' }
 ]);
 
 /********** REAL TIME LOGIC **********/
 function addDataRealTime() {
+  // Uptime entre 99.5% y 100%
   const newX = lastDate + UPDATE_INTERVAL;
-  const newY = Math.floor(Math.random() * 90) + 10;
-  data.value.push({ x: newX, y: newY });
+  const newY = 99.5 + Math.random() * 0.5;
+  const uptime = parseFloat(newY.toFixed(2));
+
+  data.value.push({ x: newX, y: uptime });
   if (data.value.length > MAX_DATA_POINTS) {
     data.value = data.value.slice(-MAX_DATA_POINTS);
-    series.value = [{ name: 'Usuarios', data: data.value }];
+    series.value = [{ name: 'Uptime (%)', data: data.value }];
   }
   lastDate = newX;
-  currentValue.value = newY;
+  currentValue.value = uptime;
 
-  // Actualizar donut con valores aleatorios dentro de rangos razonables
-  donutData.value.forEach((item) => {
-    if (item.name === 'España') {
-      item.value = Math.floor(Math.random() * (99 - 80 + 1) + 80); // entre 80 y 99
-    } else if (item.name === 'Mundo') {
-      item.value = Math.floor(Math.random() * (30 - 10 + 1) + 10); // entre 10 y 30
-    }
-  });
+  // Distribución de tiempos de cálculo Fantasy
+  const fast = 55 + Math.floor(Math.random() * 11);   // 55–65
+  const medium = 25 + Math.floor(Math.random() * 11); // 25–35
+  const slow = 100 - fast - medium;
+
+  donutData.value = [
+  { value: 85, name: 'España', color: '#f97316' },
+  { value: 28, name: 'Mundo', color: '#10b981' }
+  ];
 }
 
 /********** LIFECYCLE **********/
 onMounted(() => {
   interval = setInterval(addDataRealTime, UPDATE_INTERVAL);
-  // Forzar un resize después del primer render
   setTimeout(() => {
     window.dispatchEvent(new Event('resize'));
   }, 100);
