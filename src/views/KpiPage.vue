@@ -206,7 +206,7 @@ const technicalGoals = ref<SmartGoal[]>([
   {
     id: 5,
     title: "Cálculo de Puntos Fantasy",
-    description: "Procesar y reflejar los puntos del modo fantasy en menos de 10 segundos tras finalizar cada carrera de la temporada de Formula 1, incluyendo el rendimiento de pilotos como Lewis Hamilton, mediante la mejora del procesamiento de datos y la automatización de los cálculos, con el objetivo de ofrecer un feedback inmediato al usuario y mantener una experiencia de juego fluida y competitiva en cada carrera durante toda la temporada.",
+    description: "Procesar y reflejar los puntos del modo fantasy en menos de 10 segundos tras finalizar cada carrera de la temporada de Formula 1, incluyendo el rendimiento de pilotos como Lewis Hamilton, mediante la mejora del procesamiento de datos y la automatización de los cálculos, con el objetivo de ofrecer un feedback inmediato al usuario y mantener una experiencia fluida y competitiva en cada carrera durante toda la temporada.",
     smart: [
       { letter: "S", content: "Optimizar el cálculo de puntos del modo fantasy incluyendo pilotos como Lewis Hamilton" },
       { letter: "M", content: "≤ 10 segundos tras finalizar la carrera" },
