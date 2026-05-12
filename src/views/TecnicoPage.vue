@@ -278,7 +278,7 @@ ion-col {
 @media (max-width: 576px) {
   .ion-row-1 { min-height: 120px; }
   .ion-row-2 { min-height: 180px; }
-  .ion-row-3 { min-height: 160px; }
+  .ion-row-3 { min-height: 210px; }
   .box {
     min-height: 100px;
   }
@@ -287,6 +287,6 @@ ion-col {
 @media (min-width: 768px) {
   .ion-row-1 { min-height: 110px; }
   .ion-row-2 { min-height: 170px; }
-  .ion-row-3 { min-height: 150px; }
+  .ion-row-3 { min-height: 210px; }
 }
 </style>

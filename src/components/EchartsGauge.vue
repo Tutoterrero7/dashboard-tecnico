@@ -23,7 +23,7 @@ watchEffect(() => {
       radius: '95%',
       min: 0,
       max: 100,
-      axisLine: { lineStyle: { width: 20, color: [[0.2, '#ff4d4d'], [0.69, '#ffa500'], [1, '#4caf50']] } },
+      axisLine: { lineStyle: { width: 20, color: [[0.7, '#ff4d4d'], [0.9, '#ffa500'], [1, '#4caf50']] } },
       pointer: { itemStyle: { color: 'auto' }, length: '60%' },
       axisTick: { distance: -20, length: 4, lineStyle: { color: '#fff', width: 1 } },
       splitLine: { distance: -20, length: 20, lineStyle: { color: '#fff', width: 2 } },
